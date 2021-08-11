@@ -580,3 +580,15 @@ Rows matched: 2  Changed: 2  Warnings: 0
 |  9 | The Walking Dead  |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
 | 10 | The Modern Family |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | ended   | eleven        |
 +----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+ select series .id as id, series.name as name, series.director as director , series.genre as genre, series.country as country from series WHERE country=2 AND status='ended';
++----+-------------------+----------+-------+---------+
+| id | name              | director | genre | country |
++----+-------------------+----------+-------+---------+
+|  2 | Never Have I Ever |        2 |     1 |       2 |
+|  4 | Friends           |        4 |     1 |       2 |
+|  6 | Mr.Robot          |        6 |     4 |       2 |
+| 10 | The Modern Family |       10 |     1 |       2 |
++----+-------------------+----------+-------+---------+
+4 rows in set (0.0015 sec)
+
+
