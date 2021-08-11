@@ -1,0 +1,582 @@
+create schema `Seriesdb`;
+Query OK, 1 row affected (0.1686 sec)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| seriesdb           |
+| sys                |
++--------------------+
+5 rows in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  SQL > use `Seriesdb`;
+Default schema set to `Seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > show tables;
+Empty set (0.0037 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > create table director (id  INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+Query OK, 0 rows affected (1.3574 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe director;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.0054 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > create table country (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL, PRIMARY KEY(id));
+Query OK, 0 rows affected (0.8865 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe country;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.2662 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > create table genre (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+Query OK, 0 rows affected (0.7135 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe genre;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.1988 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > create table series (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256), genre INT NOT NULL,director INT NOT NULL, country INT NOT NULL, year_of_release DATE,year_of_end Date,PRIMARY KEY(id));
+Query OK, 0 rows affected (0.6769 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.2745 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('Anvita Dutt Guptan');
+Query OK, 1 row affected (0.1621 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('Jeff Wadlow');
+Query OK, 1 row affected (0.1828 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' Elizabeth Banks');
+Query OK, 1 row affected (0.0812 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' Sayantan Mukherjee');
+Query OK, 1 row affected (0.1927 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' Mindy Kaling');
+Query OK, 1 row affected (0.1440 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' Ãlex Pina');
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| seriesdb           |
+| sys                |
++--------------------+
+5 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  SQL > show seriesdb;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seriesdb' at line 1
+ MySQL  localhost:3306 ssl  SQL > use seriesdb;
+Default schema set to `seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table director;
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | director | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    6 |      100 | NULL  |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0418 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`director`.`id` AS `id`,`seriesdb`.`director`.`name` AS `name` from `seriesdb`.`director`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
+Empty set (0.1438 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table genre;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | genre | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0016 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`genre`.`id` AS `id`,`seriesdb`.`genre`.`name` AS `name` from `seriesdb`.`genre`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values ('Duffer Brothers');
+Query OK, 1 row affected (0.0905 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
++----+-----------------+
+| id | name            |
++----+-----------------+
+|  1 | Duffer Brothers |
++----+-----------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Suparn Varma');
+Query OK, 1 row affected (0.1271 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('David Crane');
+Query OK, 1 row affected (0.1361 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Baran bo Odar');
+Query OK, 1 row affected (0.1861 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
++----+-----------------+
+| id | name            |
++----+-----------------+
+|  1 | Duffer Brothers |
+|  2 | Suparn Varma    |
+|  3 | David Crane     |
+|  4 | Baran bo Odar   |
++----+-----------------+
+4 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > truncate table genre;
+Query OK, 0 rows affected (1.8427 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table genre;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | genre | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.1439 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`genre`.`id` AS `id`,`seriesdb`.`genre`.`name` AS `name` from `seriesdb`.`genre`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('James Burrows');
+ERROR: 2013 (HY000): Lost connection to MySQL server during query
+The global session got disconnected..
+Attempting to reconnect to 'mysql://root@localhost:3306/seriesdb'..
+The global session was successfully reconnected.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > \connect root@localhost:3306
+Creating a session to 'root@localhost:3306'
+Fetching schema names for autocompletion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 23
+Server version: 8.0.26 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| seriesdb           |
+| sys                |
++--------------------+
+5 rows in set (0.0023 sec)
+ MySQL  localhost:3306 ssl  SQL > use seriesdb;
+Default schema set to `seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table series;
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | series | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0396 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`series`.`id` AS `id`,`seriesdb`.`series`.`name` AS `name`,`seriesdb`.`series`.`genre` AS `genre`,`seriesdb`.`series`.`director` AS `director`,`seriesdb`.`series`.`country` AS `country`,`seriesdb`.`series`.`year_of_release` AS `year_of_release`,`seriesdb`.`series`.`year_of_end` AS `year_of_end` from `seriesdb`.`series`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director (name) values('James Burrows');
+Query OK, 1 row affected (0.2135 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director (name) values('Mike Flanagan');
+Query OK, 1 row affected (0.1111 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('Sam Esmail');
+Query OK, 1 row affected (0.1121 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('Avinash Arun');
+Query OK, 1 row affected (0.1277 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('Anurag Kashyap');
+Query OK, 1 row affected (0.2483 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('Frank Darabont');
+Query OK, 1 row affected (0.1352 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('Steven Levitan');
+Query OK, 1 row affected (0.1642 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  1 | Anvita Dutt Guptan  |
+|  2 | Jeff Wadlow         |
+|  3 |  Elizabeth Banks    |
+|  4 |  Sayantan Mukherjee |
+|  5 |  Mindy Kaling       |
+|  6 |  Ãlex Pina          |
+|  7 | James Burrows       |
+|  8 | Mike Flanagan       |
+|  9 | Sam Esmail          |
+| 10 | Avinash Arun        |
+| 11 | Anurag Kashyap      |
+| 12 | Frank Darabont      |
+| 13 | Steven Levitan      |
++----+---------------------+
+13 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > DELETE from 'director' WHERE 'id'=1;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''director' WHERE 'id'=1' at line 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > delete from 'director' where 'id'=1;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''director' where 'id'=1' at line 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > DELETE from director WHERE id=1;
+Query OK, 1 row affected (0.1970 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  2 | Jeff Wadlow         |
+|  3 |  Elizabeth Banks    |
+|  4 |  Sayantan Mukherjee |
+|  5 |  Mindy Kaling       |
+|  6 |  Ãlex Pina          |
+|  7 | James Burrows       |
+|  8 | Mike Flanagan       |
+|  9 | Sam Esmail          |
+| 10 | Avinash Arun        |
+| 11 | Anurag Kashyap      |
+| 12 | Frank Darabont      |
+| 13 | Steven Levitan      |
++----+---------------------+
+12 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > DELETE from director WHERE id=2;
+Query OK, 1 row affected (0.1073 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > DELETE from director WHERE id=3;
+Query OK, 1 row affected (0.1432 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  4 |  Sayantan Mukherjee |
+|  5 |  Mindy Kaling       |
+|  6 |  Ãlex Pina          |
+|  7 | James Burrows       |
+|  8 | Mike Flanagan       |
+|  9 | Sam Esmail          |
+| 10 | Avinash Arun        |
+| 11 | Anurag Kashyap      |
+| 12 | Frank Darabont      |
+| 13 | Steven Levitan      |
++----+---------------------+
+10 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=1 WHERE id=4;
+Query OK, 1 row affected (0.1569 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  1 |  Sayantan Mukherjee |
+|  5 |  Mindy Kaling       |
+|  6 |  Ãlex Pina          |
+|  7 | James Burrows       |
+|  8 | Mike Flanagan       |
+|  9 | Sam Esmail          |
+| 10 | Avinash Arun        |
+| 11 | Anurag Kashyap      |
+| 12 | Frank Darabont      |
+| 13 | Steven Levitan      |
++----+---------------------+
+10 rows in set (0.0629 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=2 WHERE id=5;
+Query OK, 1 row affected (0.1187 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=3 WHERE id=6;
+Query OK, 1 row affected (0.1002 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=4 WHERE id=7;
+Query OK, 1 row affected (0.2130 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  1 |  Sayantan Mukherjee |
+|  2 |  Mindy Kaling       |
+|  3 |  Ãlex Pina          |
+|  4 | James Burrows       |
+|  8 | Mike Flanagan       |
+|  9 | Sam Esmail          |
+| 10 | Avinash Arun        |
+| 11 | Anurag Kashyap      |
+| 12 | Frank Darabont      |
+| 13 | Steven Levitan      |
++----+---------------------+
+10 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=5 WHERE id=8;
+Query OK, 1 row affected (0.1450 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=6 WHERE id=9;
+Query OK, 1 row affected (0.1018 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=7 WHERE id=10;
+Query OK, 1 row affected (0.1225 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=8 WHERE id=11;
+Query OK, 1 row affected (0.2804 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=9 WHERE id=12;
+Query OK, 1 row affected (0.1643 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE director SET id=10 WHERE id=13;
+Query OK, 1 row affected (0.1037 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select *from director;
++----+---------------------+
+| id | name                |
++----+---------------------+
+|  1 |  Sayantan Mukherjee |
+|  2 |  Mindy Kaling       |
+|  3 |  Ãlex Pina          |
+|  4 | James Burrows       |
+|  5 | Mike Flanagan       |
+|  6 | Sam Esmail          |
+|  7 | Avinash Arun        |
+|  8 | Anurag Kashyap      |
+|  9 | Frank Darabont      |
+| 10 | Steven Levitan      |
++----+---------------------+
+10 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table genre;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | genre | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0030 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`genre`.`id` AS `id`,`seriesdb`.`genre`.`name` AS `name` from `seriesdb`.`genre`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Comedy');
+Query OK, 1 row affected (0.1695 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Thriller');
+Query OK, 1 row affected (0.1580 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Horror');
+Query OK, 1 row affected (0.1255 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert intom genre(name) values('Drama');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'genre(name) values('Drama')' at line 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Drama');
+Query OK, 1 row affected (0.1254 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Comedy   |
+|  2 | Thriller |
+|  3 | Horror   |
+|  4 | Drama    |
++----+----------+
+4 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table country;
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table   | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | country | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0488 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`country`.`id` AS `id`,`seriesdb`.`country`.`name` AS `name` from `seriesdb`.`country`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('India');
+Query OK, 1 row affected (0.1333 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('USA');
+Query OK, 1 row affected (0.1246 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into counry(name) values('Spain');
+ERROR: 1146 (42S02): Table 'seriesdb.counry' doesn't exist
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('Spain');
+Query OK, 1 row affected (0.1297 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from country;
++----+-------+
+| id | name  |
++----+-------+
+|  1 | India |
+|  2 | USA   |
+|  3 | Spain |
++----+-------+
+3 rows in set (0.0601 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD language VARCHAR(256);
+Query OK, 0 rows affected (1.8856 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
+| language        | varchar(256) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.0765 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD status VARCHAR(256);
+Query OK, 0 rows affected (0.5480 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD no._of_seasons VARCHAR(256);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '._of_seasons VARCHAR(256)' at line 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD no_of_seasons VARCHAR(256);
+Query OK, 0 rows affected (0.5557 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
+| language        | varchar(256) | YES  |     | NULL    |                |
+| status          | varchar(256) | YES  |     | NULL    |                |
+| no_of_seasons   | varchar(256) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+10 rows in set (0.1513 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values ('Ray',4,1,1,'2021','null','Hindi','end',1);
+ERROR: 1292 (22007): Incorrect date value: '2021' for column 'year_of_release' at row 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values('Ray' , 4, 1, 1, '25-06-21','null','Hindi','end',1);
+ERROR: 1292 (22007): Incorrect date value: 'null' for column 'year_of_end' at row 1
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values('Ray", 4, 1, 1,'25-06-21','Hindi','end',1);
+                                         '> ^C
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series
+                                         ->
+                                         ->
+                                         -> ^C
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
+| language        | varchar(256) | YES  |     | NULL    |                |
+| status          | varchar(256) | YES  |     | NULL    |                |
+| no_of_seasons   | varchar(256) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+10 rows in set (0.0041 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(1,'Ray',4,1,1,'2021-06-25','2021-06-25','Hindi','ended','one');
+Query OK, 1 row affected (0.1780 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from series;
++----+------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+| id | name | genre | director | country | year_of_release | year_of_end | language | status | no_of_seasons |
++----+------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+|  1 | Ray  |     4 |        1 |       1 | 2021-06-25      | 2021-06-25  | Hindi    | ended  | one           |
++----+------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+1 row in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(2,'Never Have I Ever',1,2,2,'2020-04-27','2021-07-15','English','ended','two');
+Query OK, 1 row affected (0.1430 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(3,'Money Heist',2,3,3,'2017-05-2','2021-12-3','Spanish','ended','two');
+Query OK, 1 row affected (0.0744 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from series;
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+| id | name              | genre | director | country | year_of_release | year_of_end | language | status | no_of_seasons |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+|  1 | Ray               |     4 |        1 |       1 | 2021-06-25      | 2021-06-25  | Hindi    | ended  | one           |
+|  2 | Never Have I Ever |     1 |        2 |       2 | 2020-04-27      | 2021-07-15  | English  | ended  | two           |
+|  3 | Money Heist       |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | ended  | two           |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+--------+---------------+
+3 rows in set (0.0646 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(4,'Friends',1,4,2,'1994-09-22','2004-05-6','English','ended','Ten');
+Query OK, 1 row affected (0.1513 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(5,'The Haunting Of Hill House',3,5,2,'1994-09-22','2021-02-21','English','renewed','one');
+Query OK, 1 row affected (0.0740 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(6,'Mr.Robot',4,6,2,'2015-06-24','2019-12-22','English','ended','four');
+Query OK, 1 row affected (0.1738 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(7,'Paatal Lok',2,7,1,'2020-05-15','2020-05-15','Hindi','ended','one');
+Query OK, 1 row affected (0.0988 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(8,'Sacred Games',2,8,1,'2018-07-5','2019-07-15','Hindi','ended','two');
+Query OK, 1 row affected (0.1677 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(9,'The Walking Dead',3,9,2,'2010-10-31','2021-07-5','English','running','ten');
+Query OK, 1 row affected (0.1407 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(10,'The Modern Family',1,10,2,'2009-09-23','2020-04-8','English','ended','eleven');
+Query OK, 1 row affected (0.1009 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from series;
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+| id | name                       | genre | director | country | year_of_release | year_of_end | language | status  | no_of_seasons |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+|  1 | Ray                        |     4 |        1 |       1 | 2021-06-25      | 2021-06-25  | Hindi    | ended   | one           |
+|  2 | Never Have I Ever          |     1 |        2 |       2 | 2020-04-27      | 2021-07-15  | English  | ended   | two           |
+|  3 | Money Heist                |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | ended   | two           |
+|  4 | Friends                    |     1 |        4 |       2 | 1994-09-22      | 2004-05-06  | English  | ended   | Ten           |
+|  5 | The Haunting Of Hill House |     3 |        5 |       2 | 1994-09-22      | 2021-02-21  | English  | renewed | one           |
+|  6 | Mr.Robot                   |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | ended   | four          |
+|  7 | Paatal Lok                 |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | ended   | one           |
+|  8 | Sacred Games               |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | ended   | two           |
+|  9 | The Walking Dead           |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
+| 10 | The Modern Family          |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | ended   | eleven        |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+10 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select name, director,genre,country from series WHERE country='USA' AND status='ended';
+Empty set, 1 warning (0.0298 sec)
+Warning (code 1292): Truncated incorrect DOUBLE value: 'USA'
+ 
+ 
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select name, director,genre,country,status from series WHERE country=2 AND status='ended';
++-------------------+----------+-------+---------+--------+
+| name              | director | genre | country | status |
++-------------------+----------+-------+---------+--------+
+| Never Have I Ever |        2 |     1 |       2 | ended  |
+| Friends           |        4 |     1 |       2 | ended  |
+| Mr.Robot          |        6 |     4 |       2 | ended  |
+| The Modern Family |       10 |     1 |       2 | ended  |
++-------------------+----------+-------+---------+--------+
+4 rows in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select *from series WHERE year_of_release BETWEEN '2010-10-31' AND '2021-07-05';
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+| id | name              | genre | director | country | year_of_release | year_of_end | language | status  | no_of_seasons |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+|  1 | Ray               |     4 |        1 |       1 | 2021-06-25      | 2021-06-25  | Hindi    | ended   | one           |
+|  2 | Never Have I Ever |     1 |        2 |       2 | 2020-04-27      | 2021-07-15  | English  | ended   | two           |
+|  3 | Money Heist       |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | ended   | two           |
+|  6 | Mr.Robot          |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | ended   | four          |
+|  7 | Paatal Lok        |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | ended   | one           |
+|  8 | Sacred Games      |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | ended   | two           |
+|  9 | The Walking Dead  |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+7 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select *from series WHERE year_of_release BETWEEN '1994-09-22' AND '2010-10-31';
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+| id | name                       | genre | director | country | year_of_release | year_of_end | language | status  | no_of_seasons |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+|  4 | Friends                    |     1 |        4 |       2 | 1994-09-22      | 2004-05-06  | English  | ended   | Ten           |
+|  5 | The Haunting Of Hill House |     3 |        5 |       2 | 1994-09-22      | 2021-02-21  | English  | renewed | one           |
+|  9 | The Walking Dead           |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
+| 10 | The Modern Family          |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | ended   | eleven        |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+4 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > UPDATE series SET year_of_release = '2018-10-12' WHERE  year_of_release='1994-09-22';
+Query OK, 2 rows affected (0.1037 sec)
+
+Rows matched: 2  Changed: 2  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from series;
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+| id | name                       | genre | director | country | year_of_release | year_of_end | language | status  | no_of_seasons |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+|  1 | Ray                        |     4 |        1 |       1 | 2021-06-25      | 2021-06-25  | Hindi    | ended   | one           |
+|  2 | Never Have I Ever          |     1 |        2 |       2 | 2020-04-27      | 2021-07-15  | English  | ended   | two           |
+|  3 | Money Heist                |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | ended   | two           |
+|  4 | Friends                    |     1 |        4 |       2 | 2018-10-12      | 2004-05-06  | English  | ended   | Ten           |
+|  5 | The Haunting Of Hill House |     3 |        5 |       2 | 2018-10-12      | 2021-02-21  | English  | renewed | one           |
+|  6 | Mr.Robot                   |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | ended   | four          |
+|  7 | Paatal Lok                 |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | ended   | one           |
+|  8 | Sacred Games               |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | ended   | two           |
+|  9 | The Walking Dead           |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
+| 10 | The Modern Family          |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | ended   | eleven        |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+10 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select *from series WHERE year_of_release BETWEEN '1994-09-22' AND '2010-10-31';
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+| id | name              | genre | director | country | year_of_release | year_of_end | language | status  | no_of_seasons |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
+|  9 | The Walking Dead  |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | running | ten           |
+| 10 | The Modern Family |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | ended   | eleven        |
++----+-------------------+-------+----------+---------+-----------------+-------------+----------+---------+---------------+
